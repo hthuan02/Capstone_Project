@@ -25,12 +25,14 @@ MAX_POSITION = 360
 LED_PIN_1 = 13
 LED_PIN_2 = 19
 LED_PIN_3 = 26
+LED_PIN_4 = 25
 FAN_PIN_4 = 6
 GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(LED_PIN_1, GPIO.OUT)
 GPIO.setup(LED_PIN_2, GPIO.OUT)
 GPIO.setup(LED_PIN_3, GPIO.OUT)
+GPIO.setup(LED_PIN_4, GPIO.OUT)
 GPIO.setup(FAN_PIN_4, GPIO.OUT)
 GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STEP, GPIO.OUT)
@@ -150,7 +152,15 @@ def webhook():
                 return jsonify({'fulfillmentText': 'LED3 is turned on'})
             elif action == 'off':
                 GPIO.output(LED_PIN_3, GPIO.LOW)
-                return jsonify({'fulfillmentText': 'LED3 is turned off'})   
+                return jsonify({'fulfillmentText': 'LED3 is turned off'})  
+        
+        elif led == 'led4':
+            if action == 'on':
+                GPIO.output(LED_PIN_4, GPIO.HIGH)
+                return jsonify({'fulfillmentText': 'LED4 is turned on'})
+            elif action == 'off':
+                GPIO.output(LED_PIN_4, GPIO.LOW)
+                return jsonify({'fulfillmentText': 'LED4 is turned off'})  
         
         elif led == 'fan':
             if action == 'on':
